@@ -20,13 +20,14 @@ app.get("/", (req, res) => {
   res.send("Welcome to Kanban Board");
 });
 
-
 const corsOptions = {
-  origin: "http://127.0.0.1:5173",
+  origin: " http://127.0.0.1:5173/",
+  methods : ["POST" , "GET" , "DELETE" , "PATCH"] ,
+  allowedHeaders: ['Content-Type'],
   optionsSuccessStatus: 200
 };
-app.use(cors(corsOptions));
 
+app.use(cors(corsOptions));
 app.listen(port, async () => {
   try {
     await connection;
