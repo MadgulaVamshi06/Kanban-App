@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 const corsOptions = {
   origin: " http://127.0.0.1:5173/",
   methods : ["POST" , "GET" , "DELETE" , "PATCH"] ,
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
 };
 
