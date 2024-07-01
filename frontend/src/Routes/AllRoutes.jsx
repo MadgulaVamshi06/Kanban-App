@@ -6,7 +6,7 @@ import Login from '../Pages/Login'
 import Register from '../Pages/Register';
 import Notes from '../Pages/Notes';
 import Logout from '../Pages/Logout';
-
+import PrivateRoute from './PrivateRoute';
 
 const AllRoutes = () => {
   return (
@@ -15,7 +15,11 @@ const AllRoutes = () => {
             <Route path='/' element={<Home/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/login' element={<Login/>}/>
-            <Route path='/notes' element={<Notes/>}/>
+            <Route path='/notes' element={
+          <PrivateRoute>
+            <Notes />
+          </PrivateRoute>
+        } />
             <Route path='/logout' element={<Logout/>}/>
         </Routes>
     </div>
