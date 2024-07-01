@@ -34,12 +34,12 @@ noteRouter.get("/all", auth, async (req, res) => {
 });
 
 
-noteRouter.patch("/update/:noteId", auth, async (req, res) => {
+noteRouter.put("/update/:id", auth, async (req, res) => {
     const { title, description, status, userId } = req.body;
-    const { noteId } = req.params;
+    const { id } = req.params;
 
     try {
-        const note = await NoteModel.findById(noteId);
+        const note = await NoteModel.findById(id);
 
         if (!note) {
             return res.status(404).json({ message: "Note not found" });
@@ -50,11 +50,11 @@ noteRouter.patch("/update/:noteId", auth, async (req, res) => {
         }
 
         await NoteModel.updateOne(
-            { _id: noteId },
+            { _id: id },
             { $set: { title, description, status } }
         );
 
-        res.status(200).json({ message: "Note updated successfully" });
+        res.status(200).send(`Note with id ${id} updated`);
     } catch (error) {
         console.error("Error updating note:", error);
         res.status(500).json({ message: "Internal Server Issue || Error updating note", error });
