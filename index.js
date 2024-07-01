@@ -28,6 +28,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
 app.listen(port, async () => {
   try {
     await connection;
