@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../Contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,13 +22,12 @@ const Login = () => {
       });
       console.log(response.data); // Log the response data
       alert(response.data.message || 'Login successful');
-      localStorage.setItem('token', response.data.token);
+      login(response.data.token);
+      navigate('/notes'); // Navigate to the notes page after successful login
     } catch (error) {
       alert('Error logging in');
     }
   };
-  
-  
 
   return (
     <form onSubmit={handleSubmit}>
